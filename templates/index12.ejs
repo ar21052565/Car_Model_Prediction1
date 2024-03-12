@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= pageTitle %>
+    </title>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Company</th>
+                <th>Car Model</th>
+                <th>Year</th>
+                <th>Fuel Type</th>
+            </tr>
+            <br><br><br><br>
+
+            <select class="selectpicker form-control" id="fuel_type" name="fuel_type" required="1">
+                <option value="">All Fuel Types</option>
+                <% if (Cleaned_Car_Dat && Cleaned_Car_Dat.length) { %>
+                    <% let uniqueFuelTypes=new Set(); %>
+                        <% for (let car_details of Cleaned_Car_Dat) { %>
+                            <% uniqueFuelTypes.add(car_details.fuel_type); %>
+                                <% } %>
+                                    <% for (let fuel_type of uniqueFuelTypes) { %>
+                                        <option value="<%= fuel_type %>">
+                                            <%= fuel_type %>
+                                        </option>
+                                        <% } %>
+                                            <% } %>
+            </select>
+
+            <br><br><br><br>
+
+        </thead>
+        <tbody>
+            <% if (Cleaned_Car_Dat && Cleaned_Car_Dat.length) { %>
+                <% for (let car_details of Cleaned_Car_Dat) { %>
+                    <tr>
+                        <td>
+                            <%= car_details.company %>
+                        </td>
+                        <td>
+                            <%= car_details.car_model %>
+                        </td>
+                        <td>
+                            <%= car_details.year %>
+                        </td>
+                        <td>
+                            <%= car_details.fuel_type %>
+                        </td>
+                    </tr>
+                    <% } %>
+                        <% } else { %>
+                            <tr>
+                                <td colspan="4">No data available</td>
+                            </tr>
+                            <% } %>
+        </tbody>
+    </table>
+</body>
+
+</html>

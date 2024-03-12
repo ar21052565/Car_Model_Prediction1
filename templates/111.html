@@ -1,0 +1,32 @@
+function load_car_models(company_id, car_model_id) {
+    var company = document.getElementById(company_id);
+    var car_model = document.getElementById(car_model_id);
+    console.log("Selected company:", company.value);
+    car_model.value = "";
+    car_model.innerHTML = "";
+
+    <% for (let car_details of Cleaned_Car_Dat) { %>
+        console.log("Car details:", <%= JSON.stringify(car_details) %>);
+        if ("<%= car_details.company %>" === company.value && Array.isArray(car_details.name)) {
+            <% for (let model of car_details.name) { %>
+                // Only include models that contain the selected company
+                <% if (model.includes(car_details.company)) { %>
+                    var newOption = document.createElement("option");
+                    newOption.value = "<%= model %>";
+                    newOption.innerHTML = "<%= model %>";
+                    car_model.options.add(newOption);
+                <% } %>
+            <% } %>
+        }
+    <% } %>
+}
+
+
+
+
+
+
+
+
+
+
